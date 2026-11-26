@@ -48,11 +48,11 @@ const fallbackProfile: Profile = {
 const fallbackProjects: Project[] = [
   {
     id: "ecommerce-regression-suite",
-    title: "E-commerce Regression Suite [Swag Labs]",
+    title: "Swag Labs E-commerce UI Automation",
     description:
-      "A cross-browser end-to-end suite for search, cart, checkout, and order confirmation, built with reusable fixtures and stable test data.",
-    tools: ["Selenium", "Java", "GitHub Actions"],
-    metrics: ["Reduced regression time by 70%", "120+ critical scenarios", "3 browser engines"],
+      "A Java-based end-to-end UI automation project for the Swag Labs demo store. Selenium WebDriver and TestNG drive a Chrome scenario through login, product selection, cart, checkout, order confirmation, and logout.",
+    tools: ["Java 16", "Selenium WebDriver", "TestNG", "Maven", "Chrome"],
+    metrics: ["Complete purchase flow from login through logout", "Order confirmation and logout are validated"],
     githubUrl: "https://github.com/AyoubBoumalek/Swag-Labs-Ecommerce-WebSite",
     demoUrl: "https://www.saucedemo.com",
     featured: true,

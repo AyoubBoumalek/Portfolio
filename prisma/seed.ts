@@ -43,18 +43,17 @@ async function main() {
   const projects = [
     {
       id: "ecommerce-regression-suite",
-      title: "E-commerce Regression Suite",
+      title: "Swag Labs E-commerce UI Automation",
       description:
-        "Built a cross-browser end-to-end suite covering customer journeys including search, cart, checkout, and order confirmation. Added reusable fixtures and stable test data setup.",
+        "A Java-based end-to-end UI automation project for the Swag Labs demo store. Selenium WebDriver and TestNG drive a Chrome scenario through login, product selection, cart, checkout, order confirmation, and logout.",
       imageUrl: null,
-      tools: JSON.stringify(["Playwright", "TypeScript", "GitHub Actions"]),
+      tools: JSON.stringify(["Java 16", "Selenium WebDriver", "TestNG", "Maven", "Chrome"]),
       metrics: JSON.stringify([
-        "Reduced regression time by 70%",
-        "Covered 120+ critical user scenarios",
-        "Runs across 3 browser engines",
+        "Complete purchase flow from login through logout",
+        "Order confirmation and logout are validated",
       ]),
-      githubUrl: "https://github.com/",
-      demoUrl: null,
+      githubUrl: "https://github.com/AyoubBoumalek/Swag-Labs-Ecommerce-WebSite",
+      demoUrl: "https://www.saucedemo.com",
       featured: true,
     },
     {
