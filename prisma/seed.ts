@@ -8,14 +8,14 @@ async function main() {
     update: {},
     create: {
       id: "default-qa-profile",
-      name: "Alex Morgan",
+      name: "Ayoub Boumalek",
       title: "QA Automation Engineer",
       bio: "QA Automation Engineer focused on building reliable, maintainable test systems. I help teams ship with confidence through thoughtful test strategy, end-to-end automation, and clear quality metrics.",
       avatarUrl: null,
       resumeUrl: null,
-      githubUrl: "https://github.com/",
+      githubUrl: "https://github.com/AyoubBoumalek",
       linkedinUrl: "https://www.linkedin.com/",
-      email: "alex.morgan@example.com",
+      email: "boumalekayoub392@gmail.com",
     },
   });
 

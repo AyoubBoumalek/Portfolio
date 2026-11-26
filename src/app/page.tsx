@@ -34,25 +34,27 @@ type Project = {
 
 type Skill = { id: string; name: string; category: string };
 
+const portfolioOwner = "Ayoub Boumalek";
+
 const fallbackProfile: Profile = {
-  name: "Alex Morgan",
-  title: "QA Automation Engineer",
+  name: portfolioOwner,
+  title: "QA Automation",
   bio: "I build dependable test systems that help teams ship with confidence. From browser automation to API quality gates, I turn repetitive checks into fast, useful feedback.",
-  email: "alex.morgan@example.com",
-  githubUrl: "https://github.com/",
+  email: "boumalekayoub392@gmail.com",
+  githubUrl: "https://github.com/AyoubBoumalek",
   linkedinUrl: "https://www.linkedin.com/",
 };
 
 const fallbackProjects: Project[] = [
   {
     id: "ecommerce-regression-suite",
-    title: "E-commerce Regression Suite",
+    title: "E-commerce Regression Suite [Swag Labs]",
     description:
       "A cross-browser end-to-end suite for search, cart, checkout, and order confirmation, built with reusable fixtures and stable test data.",
-    tools: ["Playwright", "TypeScript", "GitHub Actions"],
+    tools: ["Selenium", "Java", "GitHub Actions"],
     metrics: ["Reduced regression time by 70%", "120+ critical scenarios", "3 browser engines"],
-    githubUrl: null,
-    demoUrl: null,
+    githubUrl: "https://github.com/AyoubBoumalek/Swag-Labs-Ecommerce-WebSite",
+    demoUrl: "https://www.saucedemo.com",
     featured: true,
   },
   {
@@ -108,7 +110,7 @@ export default function Home() {
       if (!active) return;
 
       if (profileResult.status === "fulfilled" && profileResult.value.profile) {
-        setProfile({ ...fallbackProfile, ...profileResult.value.profile });
+        setProfile({ ...fallbackProfile, ...profileResult.value.profile, name: portfolioOwner });
       }
       if (
         projectsResult.status === "fulfilled" &&
@@ -150,7 +152,7 @@ export default function Home() {
             <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-indigo-300/20 bg-indigo-300/[0.08] text-indigo-200">
               <ShieldCheck size={18} />
             </span>
-            <span className="text-sm font-semibold tracking-wide">{profile.name}</span>
+            <span className="text-sm font-semibold tracking-wide">{portfolioOwner}</span>
           </a>
           <div className="hidden items-center gap-8 text-sm text-slate-400 sm:flex">
             <a className="transition hover:text-white" href="#work">Projects</a>
@@ -222,7 +224,7 @@ export default function Home() {
               <span className="font-mono text-[10px] tracking-wide text-slate-600">quality-pipeline.yml</span>
             </div>
             <div className="space-y-4 py-6 font-mono text-xs sm:text-[13px]">
-              <p className="text-slate-600">01 <span className="ml-4 text-indigo-300">name:</span> <span className="text-slate-300">Quality gate</span></p>
+              <p className="text-slate-600">01 <span className="ml-4 text-indigo-300">name:</span> <span className="text-slate-300">BOUMALEK AYOUB</span></p>
               <p className="text-slate-600">02 <span className="ml-4 text-indigo-300">on:</span> <span className="text-slate-300">[pull_request]</span></p>
               <p className="text-slate-600">03</p>
               <p className="text-slate-600">04 <span className="ml-4 text-indigo-300">jobs:</span></p>
