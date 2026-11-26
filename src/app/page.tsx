@@ -158,7 +158,7 @@ export default function Home() {
             <a className="transition hover:text-white" href="#contact">Contact</a>
           </div>
           <a
-            href="#contact"
+            href="mailto:boumalekayoub392@gmail.com"
             className="rounded-full border border-white/10 px-4 py-2 text-xs font-medium text-slate-200 transition hover:border-indigo-300/40 hover:bg-white/[0.04]"
           >
             Let&apos;s talk
@@ -197,7 +197,7 @@ export default function Home() {
               Explore my work <ArrowDown size={16} />
             </a>
             <a
-              href={`mailto:${profile.email}`}
+              href="mailto:boumalekayoub392@gmail.com"
               className="inline-flex h-12 items-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-5 text-sm font-semibold text-slate-200 transition hover:border-white/20 hover:bg-white/[0.06]"
             >
               <Mail size={16} /> Get in touch
@@ -317,7 +317,7 @@ export default function Home() {
             <p className="mt-3 text-sm text-slate-400">Have a quality challenge or a role in mind? I&apos;d like to hear about it.</p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <a href={`mailto:${profile.email}`} className="inline-flex h-11 items-center gap-2 rounded-xl bg-indigo-500 px-4 text-sm font-semibold text-white transition hover:bg-indigo-400"><Mail size={16} /> Email me</a>
+            <a href="mailto:boumalekayoub392@gmail.com" className="inline-flex h-11 items-center gap-2 rounded-xl bg-indigo-500 px-4 text-sm font-semibold text-white transition hover:bg-indigo-400"><Mail size={16} /> Email me</a>
             {profile.githubUrl ? <a href={profile.githubUrl} target="_blank" rel="noreferrer" aria-label="GitHub" className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 text-slate-300 transition hover:bg-white/[0.05] hover:text-white"><Code2 size={17} /></a> : null}
             {profile.linkedinUrl ? <a href={profile.linkedinUrl} target="_blank" rel="noreferrer" className="inline-flex h-11 items-center rounded-xl border border-white/10 px-4 text-sm font-medium text-slate-300 transition hover:bg-white/[0.05] hover:text-white">LinkedIn <ArrowUpRight size={14} className="ml-1" /></a> : null}
           </div>
