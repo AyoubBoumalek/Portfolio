@@ -11,12 +11,15 @@ import {
   ShieldCheck,
   Workflow,
 } from "lucide-react";
+import { trackPortfolioEvent } from "@/lib/portfolio-analytics";
 
 type Profile = {
   name: string;
   title: string;
   bio: string;
   email: string;
+  avatarUrl: string | null;
+  resumeUrl: string | null;
   githubUrl: string | null;
   linkedinUrl: string | null;
 };
@@ -27,6 +30,7 @@ type Project = {
   description: string;
   tools: string[];
   metrics: string[];
+  imageUrl?: string | null;
   githubUrl: string | null;
   demoUrl: string | null;
   featured: boolean;
@@ -41,6 +45,8 @@ const fallbackProfile: Profile = {
   title: "QA Automation",
   bio: "I build dependable test systems that help teams ship with confidence. From browser automation to API quality gates, I turn repetitive checks into fast, useful feedback.",
   email: "boumalekayoub392@gmail.com",
+  avatarUrl: null,
+  resumeUrl: null,
   githubUrl: "https://github.com/AyoubBoumalek",
   linkedinUrl: "https://www.linkedin.com/",
 };
@@ -101,6 +107,10 @@ export default function Home() {
   const [skills, setSkills] = useState(fallbackSkills);
 
   useEffect(() => {
+    trackPortfolioEvent("page_view");
+  }, []);
+
+  useEffect(() => {
     let active = true;
 
     async function loadPortfolio() {
@@ -113,7 +123,7 @@ export default function Home() {
       if (!active) return;
 
       if (profileResult.status === "fulfilled" && profileResult.value.profile) {
-        setProfile({ ...fallbackProfile, ...profileResult.value.profile, name: portfolioOwner });
+        setProfile({ ...fallbackProfile, ...profileResult.value.profile });
       }
       if (
         projectsResult.status === "fulfilled" &&
@@ -152,10 +162,10 @@ export default function Home() {
       <header className="relative z-10 border-b border-white/[0.07]">
         <nav className="mx-auto flex h-[76px] max-w-6xl items-center justify-between px-5 sm:px-8">
           <a href="#home" className="flex items-center gap-3" aria-label="Go to home">
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-indigo-300/20 bg-indigo-300/[0.08] text-indigo-200">
-              <ShieldCheck size={18} />
+            <span className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-xl border border-indigo-300/20 bg-indigo-300/[0.08] text-indigo-200">
+              {profile.avatarUrl ? <img src={profile.avatarUrl} alt="" className="h-full w-full object-cover" /> : <ShieldCheck size={18} />}
             </span>
-            <span className="text-sm font-semibold tracking-wide">{portfolioOwner}</span>
+            <span className="text-sm font-semibold tracking-wide">{profile.name}</span>
           </a>
           <div className="hidden items-center gap-8 text-sm text-slate-400 sm:flex">
             <a className="transition hover:text-white" href="#work">Projects</a>
@@ -163,7 +173,8 @@ export default function Home() {
             <a className="transition hover:text-white" href="#contact">Contact</a>
           </div>
           <a
-            href="mailto:boumalekayoub392@gmail.com"
+            href={`mailto:${profile.email}`}
+            onClick={() => trackPortfolioEvent("email_click", "header")}
             className="rounded-full border border-white/10 px-4 py-2 text-xs font-medium text-slate-200 transition hover:border-indigo-300/40 hover:bg-white/[0.04]"
           >
             Let&apos;s talk
@@ -202,11 +213,23 @@ export default function Home() {
               Explore my work <ArrowDown size={16} />
             </a>
             <a
-              href="mailto:boumalekayoub392@gmail.com"
+              href={`mailto:${profile.email}`}
+              onClick={() => trackPortfolioEvent("email_click", "hero")}
               className="inline-flex h-12 items-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-5 text-sm font-semibold text-slate-200 transition hover:border-white/20 hover:bg-white/[0.06]"
             >
               <Mail size={16} /> Get in touch
             </a>
+            {profile.resumeUrl ? (
+              <a
+                href={profile.resumeUrl}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => trackPortfolioEvent("resume_click")}
+                className="inline-flex h-12 items-center rounded-xl border border-white/10 px-5 text-sm font-semibold text-slate-200 transition hover:border-white/20 hover:bg-white/[0.06]"
+              >
+                View résumé
+              </a>
+            ) : null}
           </div>
 
           <div className="mt-10 flex items-center gap-3 text-sm text-slate-500">
@@ -264,6 +287,7 @@ export default function Home() {
           <div className="grid gap-4 lg:grid-cols-3">
             {projects.map((project, index) => (
               <article key={project.id} className="group flex min-h-[360px] flex-col rounded-2xl border border-white/[0.08] bg-[#10131a] p-5 transition hover:-translate-y-1 hover:border-indigo-300/25 sm:p-6">
+                {project.imageUrl ? <div className="mb-5 h-36 overflow-hidden rounded-xl border border-white/[0.06] bg-white/[0.03]"><img src={project.imageUrl} alt={`${project.title} preview`} className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]" loading="lazy" /></div> : null}
                 <div className="mb-7 flex items-center justify-between">
                   <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-indigo-300/10 bg-indigo-300/[0.06] text-indigo-200">
                     {index === 0 ? <Layers3 size={19} /> : index === 1 ? <ShieldCheck size={19} /> : <Workflow size={19} />}
@@ -283,8 +307,8 @@ export default function Home() {
                   {project.tools.slice(0, 4).map((tool) => (
                     <span key={tool} className="rounded-md bg-white/[0.04] px-2 py-1 text-[10px] text-slate-400">{tool}</span>
                   ))}
-                  {project.githubUrl ? <a className="ml-auto inline-flex items-center gap-1 text-xs text-indigo-200 hover:text-white" href={project.githubUrl} target="_blank" rel="noreferrer">Code <ArrowUpRight size={13} /></a> : null}
-                  {project.demoUrl ? <a className="inline-flex items-center gap-1 text-xs text-indigo-200 hover:text-white" href={project.demoUrl} target="_blank" rel="noreferrer">Demo <ArrowUpRight size={13} /></a> : null}
+                  {project.githubUrl ? <a onClick={() => trackPortfolioEvent("project_code_click", project.id)} className="ml-auto inline-flex items-center gap-1 text-xs text-indigo-200 hover:text-white" href={project.githubUrl} target="_blank" rel="noreferrer">Code <ArrowUpRight size={13} /></a> : null}
+                  {project.demoUrl ? <a onClick={() => trackPortfolioEvent("project_demo_click", project.id)} className="inline-flex items-center gap-1 text-xs text-indigo-200 hover:text-white" href={project.demoUrl} target="_blank" rel="noreferrer">Demo <ArrowUpRight size={13} /></a> : null}
                 </div>
               </article>
             ))}
@@ -322,9 +346,9 @@ export default function Home() {
             <p className="mt-3 text-sm text-slate-400">Have a quality challenge or a role in mind? I&apos;d like to hear about it.</p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <a href="mailto:boumalekayoub392@gmail.com" className="inline-flex h-11 items-center gap-2 rounded-xl bg-indigo-500 px-4 text-sm font-semibold text-white transition hover:bg-indigo-400"><Mail size={16} /> Email me</a>
-            {profile.githubUrl ? <a href={profile.githubUrl} target="_blank" rel="noreferrer" aria-label="GitHub" className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 text-slate-300 transition hover:bg-white/[0.05] hover:text-white"><Code2 size={17} /></a> : null}
-            {profile.linkedinUrl ? <a href={profile.linkedinUrl} target="_blank" rel="noreferrer" className="inline-flex h-11 items-center rounded-xl border border-white/10 px-4 text-sm font-medium text-slate-300 transition hover:bg-white/[0.05] hover:text-white">LinkedIn <ArrowUpRight size={14} className="ml-1" /></a> : null}
+            <a href={`mailto:${profile.email}`} onClick={() => trackPortfolioEvent("email_click", "contact")} className="inline-flex h-11 items-center gap-2 rounded-xl bg-indigo-500 px-4 text-sm font-semibold text-white transition hover:bg-indigo-400"><Mail size={16} /> Email me</a>
+            {profile.githubUrl ? <a onClick={() => trackPortfolioEvent("github_click")} href={profile.githubUrl} target="_blank" rel="noreferrer" aria-label="GitHub" className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 text-slate-300 transition hover:bg-white/[0.05] hover:text-white"><Code2 size={17} /></a> : null}
+            {profile.linkedinUrl ? <a onClick={() => trackPortfolioEvent("linkedin_click")} href={profile.linkedinUrl} target="_blank" rel="noreferrer" className="inline-flex h-11 items-center rounded-xl border border-white/10 px-4 text-sm font-medium text-slate-300 transition hover:bg-white/[0.05] hover:text-white">LinkedIn <ArrowUpRight size={14} className="ml-1" /></a> : null}
           </div>
         </div>
       </section>

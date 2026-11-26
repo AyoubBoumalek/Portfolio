@@ -2,7 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { ADMIN_SESSION_COOKIE, isValidAdminSession } from "@/lib/auth";
 
 const MUTATING_METHODS = new Set(["POST", "PUT", "DELETE"]);
-const PUBLIC_AUTH_ROUTES = new Set(["/api/auth/login"]);
+const PUBLIC_MUTATION_ROUTES = new Set(["/api/auth/login", "/api/analytics"]);
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -20,7 +20,7 @@ export async function proxy(request: NextRequest) {
   if (
     isApiRequest &&
     MUTATING_METHODS.has(request.method) &&
-    !PUBLIC_AUTH_ROUTES.has(pathname)
+    !PUBLIC_MUTATION_ROUTES.has(pathname)
   ) {
     const token = request.cookies.get(ADMIN_SESSION_COOKIE)?.value;
     if (!token || !(await isValidAdminSession(token))) {

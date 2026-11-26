@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -39,4 +39,17 @@ model Skill {
   category String
 
   @@unique([name, category])
+}
+
+model AnalyticsEvent {
+  id        String   @id @default(cuid())
+  visitorId String
+  eventType String
+  target    String?
+  path      String
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([eventType, createdAt])
+  @@index([visitorId, createdAt])
 }
