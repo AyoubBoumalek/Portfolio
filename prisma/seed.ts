@@ -58,18 +58,17 @@ async function main() {
     },
     {
       id: "api-contract-validation",
-      title: "API Contract Validation",
+      title: "TutorialsNinja Registration Automation",
       description:
-        "Created an automated API validation workflow for a booking platform, checking response schemas, authentication, error handling, and key business rules on every pull request.",
+        "Robot Framework and SeleniumLibrary UI automation for the TutorialsNinja demo registration form. The suite fills account details, generates email and telephone values, accepts the privacy policy, submits the form, and checks the success route.",
       imageUrl: null,
-      tools: JSON.stringify(["Postman", "Python", "Docker"]),
+      tools: JSON.stringify(["Robot Framework", "SeleniumLibrary", "Python", "Chrome"]),
       metrics: JSON.stringify([
-        "Validated 85 API endpoints",
-        "Cut manual API checks by 60%",
-        "Detected breaking changes before release",
+        "Automates the full account registration flow",
+        "Checks that the resulting URL contains /success",
       ]),
-      githubUrl: "https://github.com/",
-      demoUrl: null,
+      githubUrl: "https://github.com/AyoubBoumalek/Subscribe-Form",
+      demoUrl: "https://tutorialsninja.com/demo",
       featured: true,
     },
     {

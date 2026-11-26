@@ -59,13 +59,13 @@ const fallbackProjects: Project[] = [
   },
   {
     id: "api-contract-validation",
-    title: "API Contract Validation",
+    title: "TutorialsNinja Registration Automation",
     description:
-      "An automated validation workflow for response schemas, authentication, error handling, and business rules on every pull request.",
-    tools: ["Postman", "Python", "Docker"],
-    metrics: ["85 API endpoints covered", "60% fewer manual checks", "Breaking changes caught early"],
-    githubUrl: null,
-    demoUrl: null,
+      "Robot Framework and SeleniumLibrary UI automation for the TutorialsNinja demo registration form. The suite fills account details, generates email and telephone values, accepts the privacy policy, submits the form, and checks the success route.",
+    tools: ["Robot Framework", "SeleniumLibrary", "Python", "Chrome"],
+    metrics: ["Automates the full account registration flow", "Checks that the resulting URL contains /success"],
+    githubUrl: "https://github.com/AyoubBoumalek/Subscribe-Form",
+    demoUrl: "https://tutorialsninja.com/demo",
     featured: true,
   },
   {
