@@ -82,13 +82,16 @@ const fallbackProjects: Project[] = [
 ];
 
 const fallbackSkills: Skill[] = [
-  { id: "playwright", name: "Playwright", category: "Test Automation" },
+  { id: "robot-framework", name: "Robot Framework", category: "Test Automation" },
   { id: "cypress", name: "Cypress", category: "Test Automation" },
   { id: "selenium", name: "Selenium", category: "Test Automation" },
-  { id: "typescript", name: "TypeScript", category: "Programming" },
+  { id: "java", name: "Java", category: "Programming" },
   { id: "python", name: "Python", category: "Programming" },
   { id: "github-actions", name: "GitHub Actions", category: "CI/CD" },
+  { id: "jenkins", name: "Jenkins", category: "CI/CD" },
+  { id: "gitlab", name: "GitLab", category: "CI/CD" },
   { id: "docker", name: "Docker", category: "DevOps" },
+  { id: "azure-devops", name: "Azure DevOps", category: "DevOps" },
   { id: "postman", name: "Postman", category: "API Testing" },
 ];
 

@@ -20,15 +20,27 @@ async function main() {
   });
 
   const skills = [
-    { name: "Playwright", category: "Test Automation" },
+    { name: "Robot Framework", category: "Test Automation" },
     { name: "Cypress", category: "Test Automation" },
     { name: "Selenium", category: "Test Automation" },
-    { name: "TypeScript", category: "Programming" },
+    { name: "Java", category: "Programming" },
     { name: "Python", category: "Programming" },
     { name: "GitHub Actions", category: "CI/CD" },
+    { name: "Jenkins", category: "CI/CD" },
+    { name: "GitLab", category: "CI/CD" },
     { name: "Docker", category: "DevOps" },
+    { name: "Azure DevOps", category: "DevOps" },
     { name: "Postman", category: "API Testing" },
   ];
+
+  await prisma.skill.deleteMany({
+    where: {
+      OR: [
+        { name: "Playwright", category: "Test Automation" },
+        { name: "TypeScript", category: "Programming" },
+      ],
+    },
+  });
 
   for (const skill of skills) {
     await prisma.skill.upsert({
