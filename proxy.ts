@@ -4,7 +4,7 @@ import { ADMIN_SESSION_COOKIE, isValidAdminSession } from "@/lib/auth";
 const MUTATING_METHODS = new Set(["POST", "PUT", "DELETE"]);
 const PUBLIC_AUTH_ROUTES = new Set(["/api/auth/login"]);
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const isAdminPage = pathname === "/admin" || pathname.startsWith("/admin/");
   const isLoginPage = pathname === "/admin/login";
